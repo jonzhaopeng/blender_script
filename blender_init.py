@@ -1,13 +1,15 @@
 import subprocess
 import sys
 import os
-PYTHONVERSION="python3.10"
-PIPLIST="scipy numpy pandas sympy"
 
-pythonbin = os.path.join(sys.prefix, 'bin', PYTHONVERSION)
+proj_dir = os.path.abspath('.')
+print("当前项目工作目录",proj_dir)
+
+print("安装pip包管理器")
+subprocess.call([sys.executable,'-m','ensurepip'])
 print("升级pip包管理器")
-subprocess.call([pythonbin, '-m', 'pip', 'install', '--upgrade', 'pip']) 
+subprocess.call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip']) 
 print("安装科学计算包")
-subprocess.call([pythonbin, '-m', 'pip', 'install', '--upgrade', PIPLIST, '--user'])
+subprocess.call([sys.executable, '-m', 'pip', 'install', '-r', "{}/requirements.txt".format(proj_dir), '--user'])
 
 print('环境安装完成')
